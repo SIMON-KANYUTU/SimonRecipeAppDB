@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">SimonRecipeAppDB</string>
+    <string name="add_recipe_button">Add Recipe</string>
+    <string name="ingredients_title">Ingredients:</string>
+    <string name="preparation_steps_title">Preparation Steps:</string>
+    <string name="welcome_message">Welcome to Simon Recipe App With DB</string>
+    <string name="logo_description">App Logo</string>
+    <!-- res/values/strings.xml -->
+    <string name="recipe_title">Recipe Title</string>
+    <string name="recipe_description">Recipe Description</string>
+
+</resources>
