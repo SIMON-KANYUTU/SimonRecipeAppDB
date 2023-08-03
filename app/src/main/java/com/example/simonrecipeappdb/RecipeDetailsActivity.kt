@@ -12,8 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 class RecipeDetailsActivity : ComponentActivity() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var ingredientsAdapter: IngredientsAdapter // Custom adapter for ingredients list.
-    private lateinit var preparationStepsAdapter: PreparationStepsAdapter // Custom adapter for preparation steps list.
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,8 +23,10 @@ class RecipeDetailsActivity : ComponentActivity() {
         val difficultyTextView: TextView = findViewById(R.id.difficultyTextView)
         val stepsTextView: TextView = findViewById(R.id.stepsTextView)
 
+        // Suppress the deprecation warning for getParcelableExtra
+        @Suppress("DEPRECATION")
         // Retrieve the recipe data from the intent extras
-        val selectedRecipe = intent.getSerializableExtra("recipe") as? Recipe
+        val selectedRecipe = intent?.getParcelableExtra<Recipe>("recipe")
         if (selectedRecipe == null) {
             // Handle the case when the recipe data is not available
             // You can show an error message or finish the activity here
@@ -34,14 +34,13 @@ class RecipeDetailsActivity : ComponentActivity() {
             return
         }
 
+
         // Initialize RecyclerView and its adapters
         recyclerView = findViewById(R.id.recyclerView)
-        ingredientsAdapter = IngredientsAdapter(selectedRecipe.ingredientsList)
-        preparationStepsAdapter = PreparationStepsAdapter(selectedRecipe.preparationStepsList)
 
         // Set up RecyclerView with a LinearLayoutManager
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = ingredientsAdapter // Assuming you want to show ingredients initially
+       // Assuming you want to show ingredients initially
 
         // Bold the titles
         val servesTitle = SpannableString("Serves: ")

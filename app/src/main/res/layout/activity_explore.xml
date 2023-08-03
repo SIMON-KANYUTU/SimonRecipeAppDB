@@ -12,7 +12,14 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/addRecipeButton"
         android:padding="16dp" />
-
+    <TextView
+        android:id="@+id/instructionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Click Add Recipe Button to add Dummy Recipes we've generated and Cick on Each Meal for More Details"
+        android:textSize="16sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp" />
     <Button
         android:id="@+id/addRecipeButton"
         android:layout_width="wrap_content"

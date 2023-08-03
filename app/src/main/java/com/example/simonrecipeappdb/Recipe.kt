@@ -1,10 +1,13 @@
 package com.example.simonrecipeappdb
 
+import android.os.Parcel
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.io.Serializable
+import kotlinx.parcelize.Parcelize
 
 @Entity(tableName = "recipe")
+@Parcelize
 data class Recipe(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
@@ -14,7 +17,15 @@ data class Recipe(
     val ingredients: String,
     val difficulty: String,
     val steps: String,
-    val ingredientsList: List<String>, // List of ingredients
-    val preparationStepsList: List<String> // List of preparation steps
+) : Parcelable {
+    constructor(parcel: Parcel) : this(
+        parcel.readLong(),
+        parcel.readString() ?: "",
+        parcel.readString() ?: "",
+        parcel.readString() ?: "",
+        parcel.readString() ?: "",
+        parcel.readString() ?: "",
+        parcel.readString() ?: "",
+    )
 
-) : Serializable
+}

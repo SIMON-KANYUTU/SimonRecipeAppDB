@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
@@ -19,5 +20,10 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     fun insert(recipe: Recipe) = viewModelScope.launch {
         repository.insert(recipe)
+    }
+    fun deleteRecipe(recipe: Recipe) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.delete(recipe)
+        }
     }
 }

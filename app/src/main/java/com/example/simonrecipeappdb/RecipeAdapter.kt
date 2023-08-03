@@ -3,9 +3,11 @@ package com.example.simonrecipeappdb
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.DiffUtil
+
 
 class RecipeDiffCallback(private val oldList: List<Recipe>, private val newList: List<Recipe>) : DiffUtil.Callback() {
     override fun getOldListSize(): Int {
@@ -29,6 +31,17 @@ class RecipeDiffCallback(private val oldList: List<Recipe>, private val newList:
 class RecipeAdapter(private var recipes: List<Recipe>, private val listener: OnItemClickListener) : RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
 
     inner class RecipeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+        val deleteButton: Button = itemView.findViewById(R.id.deleteButton)
+
+        init {
+            itemView.setOnClickListener(this)
+            deleteButton.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    listener.onDeleteClick(position)
+                }
+            }
+        }
         init {
             itemView.setOnClickListener(this)
         }
@@ -46,6 +59,7 @@ class RecipeAdapter(private var recipes: List<Recipe>, private val listener: OnI
 
     interface OnItemClickListener {
         fun onItemClick(position: Int)
+        fun onDeleteClick(position: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
